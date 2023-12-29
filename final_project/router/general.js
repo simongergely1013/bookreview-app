@@ -32,31 +32,55 @@ public_users.post("/register", (req,res) => {
 
 // Get the book list available in the shop
 public_users.get('/',function (req, res) {
-  res.send(users)
+  res.send(books)
 });
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const isbn = req.params.isbn;
+  const booksArray = Object.values(books);
+  const filteredBooks = booksArray.filter(book => book.ISBN === isbn);
+  if(filteredBooks.length > 0){
+    res.send(filteredBooks[0])
+  } else {
+    return res.status(404).json({message: "Book not found"});
+  }
  });
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const author = req.params.author;
+  const booksArray = Object.values(books);
+  const filteredBooks = booksArray.filter(book => book.author === author);
+  if(filteredBooks.length > 0){
+    res.send(filteredBooks[0])
+  } else {
+    return res.status(404).json({message: "Book not found"});
+  }
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const title = req.params.author;
+  const booksArray = Object.values(books);
+  const filteredBooks = booksArray.filter(book => book.title === title);
+  if(filteredBooks.length > 0){
+    res.send(filteredBooks[0])
+  } else {
+    return res.status(404).json({message: "Book not found"});
+  }
 });
 
-//  Get book review
+//  Get book review based on ISBN
 public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const isbn = req.params.isbn;
+  const booksArray = Object.values(books);
+  const filteredBooks = booksArray.filter(book => book.ISBN === isbn);
+  if(filteredBooks.length > 0){
+    res.send(filteredBooks[0].reviews)
+  } else {
+    return res.status(404).json({message: "Book not found"});
+  }
 });
 
 module.exports.general = public_users;
