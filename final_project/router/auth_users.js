@@ -75,7 +75,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
     } else {
       return res.status(404).json({message: "Book not found"});
     }
-    res.status(200).send(`Review successfully added by ${username}`)
+    res.status(200).send(`Review successfully added by ${username} to book with ISBN ${isbn}`)
   } else {
     res.status(400).send("Log in or register to add review")
   }
@@ -97,7 +97,7 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
     } else {
       return res.status(404).json({message: "Book not found"});
     }
-    res.status(200).send("Review successfully removed")
+    res.status(200).send(`Review successfully removed from book with ISBN ${isbn}`)
   } else {
     res.status(400).send("Log in or register to add review")
   }
